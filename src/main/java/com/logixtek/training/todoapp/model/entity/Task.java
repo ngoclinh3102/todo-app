@@ -1,31 +1,31 @@
-package com.logixtek.training.todoapp.entity;
+package com.logixtek.training.todoapp.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Task {
     @Id
-    private long id;
+    private String id;
 
-    private long userId;
+    private String userId;
+
+    private Date doAt;
 
     private String title;
 
     private String description;
 
-    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
-    private Date doAt;
-
-    private Boolean status;
+    private boolean status;
 
 }

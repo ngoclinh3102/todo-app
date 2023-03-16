@@ -1,41 +1,39 @@
 package com.logixtek.training.todoapp.controller;
 
-import com.logixtek.training.todoapp.entity.User;
+import com.logixtek.training.todoapp.model.response.UserResponse;
+import com.logixtek.training.todoapp.model.entity.Task;
+import com.logixtek.training.todoapp.model.entity.User;
 import com.logixtek.training.todoapp.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
+@AllArgsConstructor
 public class UserController {
     private final UserService userService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-
     @PostMapping("/user/create")
-    public User create(@RequestBody User user) {
-        return userService.save(user);
+    public UserResponse createUser(@RequestBody User user) {
+        return userService.createUser(user);
     }
 
     @GetMapping("/user/{id}")
-    public User getById(@PathVariable long id) {
-        return userService.findById(id);
+    public UserResponse getUser(@PathVariable String id) {
+        return userService.getUserById(id);
     }
 
-    @GetMapping("/user/all")
-    public List<User> getAll() {
-        return userService.findAll();
+    @PostMapping("/user/{userId}/add-task")
+    public UserResponse addTask(@PathVariable String userId, @RequestBody Task task) {
+        return userService.addTask(userId,task);
     }
 
-    @PutMapping("/user/update")
-    public User update(@RequestBody User user) {
-        return userService.update(user);
+    @DeleteMapping("/user/{userId}/remove-task/{taskId}")
+    public UserResponse removeTask(@PathVariable String userId, @PathVariable String taskId) {
+        return userService.removeTask(userId, taskId);
     }
 
-    @DeleteMapping("/user/delete/{id}")
-    public String delete(@PathVariable long id) {
-        return userService.delete(id);
+    @PutMapping("/user/{userId}/complete-task/{taskId}")
+    public UserResponse completeTask(@PathVariable String userId, @PathVariable String taskId) {
+        return userService.completeTask(userId, taskId);
     }
 }

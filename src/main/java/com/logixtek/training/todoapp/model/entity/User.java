@@ -1,18 +1,17 @@
-package com.logixtek.training.todoapp.entity;
+package com.logixtek.training.todoapp.model.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
     @Id
-    private long id;
+    private String id;
 
     private String name;
 
